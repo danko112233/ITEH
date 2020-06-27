@@ -1,0 +1,29 @@
+u bazu userregistration:
+
+create table usertable (
+name varchar(255) NOT NULL PRIMARY KEY,
+password varchar(255) NOT NULL,
+type int(1) NOT NULL DEFAULT 0,
+profilna int(11) NOT NULL DEFAULT 0
+);
+
+
+
+insert into usertable (name, password, type) values ('danko', 'danko', 1)
+
+
+
+create table friends (
+friend_id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+user1_id varchar(225) NOT NULL,
+user2_id varchar(225) NOT NULL,
+status int(11) NOT NULL DEFAULT 0
+);
+
+
+create table chat (
+id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+fr_1 varchar(225) NOT NULL,
+fr_2 varchar(225) NOT NULL,
+messasge varchar(225) NOT NULL
+);

@@ -1,0 +1,98 @@
+body{
+    background: linear-gradient(rgba(0,0,50,0.5), rgba(0,0,50,0.5)), url(image.jpg) no-repeat center center fixed;
+    background-size: cover;
+    background-position: top;
+    
+}
+
+
+#prvi-red{
+    background-position: top;
+}
+
+#prvi{
+    font-size: 1cm;
+    color: lavenderblush;
+}
+
+#prva{
+    background-color: royalblue;
+    text-align: center;
+    height: auto;
+}
+
+#druga{
+    background-color: purple;
+    text-align: center;
+    height: 1.5cm;
+    font-size: 8mm;
+    
+}
+
+#treca{
+    background-color:royalblue;
+    text-align: center;
+    height: 1.5cm;
+}
+
+#log{
+    position: absolute;
+    top: 50%;
+
+    transform: translateY(-50%);
+}
+
+#find{
+    position: absolute;
+    top: 50%;
+    right: 20%;
+
+    transform: translateY(-50%);
+    width: 100mm;
+    background-color: lightslategrey;
+}
+
+#livesearch{
+    position: absolute;
+    width: 100mm;
+    top: 75%;
+    left: 22%;
+    background: gray;
+    z-index: 1;
+}
+
+.table-responsive{
+    background-color: white;
+    width: auto;
+}
+
+.alert {
+    padding: 20px;
+    background-color: green;
+    color: white;
+    text-align: center;
+}
+  
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+  
+.closebtn:hover {
+    color: black;
+}
+
+#fr{
+    display: inline-block;
+}
+
+#notfr{
+    display: inline-block;
+}
+
