@@ -16,9 +16,7 @@
     $user1istat = mysqli_fetch_row($res1);
 
     if($user2istat[0] == $user2 && $user2istat[1] == 0){
-        echo "Vec ste poslali friend request  !";
-        echo $user2istat[0];
-        echo $user2istat[1];
+        echo "Vec ste poslali friend request  ! ! ! ";
     }
     elseif($user1istat[0] == $user2 && $user1istat[1] == 0){
         echo "Vec vam je poslat friend request od ove osobe, sada ste prijatelji";
