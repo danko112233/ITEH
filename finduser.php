@@ -81,7 +81,7 @@ $brojProfilne = mysqli_fetch_row($res);
 
     <div id = "drugi-red" class= "row">
 
-        <?php if($prof != $_SESSION['username']){     ?> 
+    <?php if($prof != $_SESSION['username']){     ?> 
         <div class= "col-sm">
             <form method="get" action="addFriend.php">
                 <button type="submit" class="btn-success">ADD FRIEND</button>
@@ -104,8 +104,8 @@ $brojProfilne = mysqli_fetch_row($res);
           
                 </div>
             </div>       
-        <?php }    ?>  
         </div>
+    <?php }    ?>  
     </div> 
 
     <script>

@@ -15,15 +15,17 @@
     $res1 = mysqli_query($con, $provera1);
     $user1istat = mysqli_fetch_row($res1);
 
-    if($user2istat[0] == $user2 && $user2istat[1] == "0"){
-        echo "Vec ste poslali friend request";
+    if($user2istat[0] == $user2 && $user2istat[1] == 0){
+        echo "Vec ste poslali friend request  !";
+        echo $user2istat[0];
+        echo $user2istat[1];
     }
-    elseif($user1istat[0] == $user2 && $user2istat[1] == "0"){
+    elseif($user1istat[0] == $user2 && $user1istat[1] == 0){
         echo "Vec vam je poslat friend request od ove osobe, sada ste prijatelji";
         $dodaj = "update friends set status=1 where user2_id ='$user1' and user1_id = '$user2'";
 
     }
-    elseif($user2istat[0] == $user2 && $user2istat[1] == 1 || $user1istat[0] == $user2 && $user2istat[1] == "1"){
+    elseif(($user2istat[0] == $user2 && $user2istat[1] == 1) || ($user1istat[0] == $user2 && $user1istat[1] == 1)){
         echo "allready friends :)";
     }
     else {
