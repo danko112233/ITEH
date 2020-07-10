@@ -5,6 +5,22 @@ body{
     
 }
 
+img[name=sveslike]{
+    width: 100%;
+    height: auto;
+}
+
+#listaPr {
+    position: fixed;
+    bottom: 1%;
+    top:70%;
+    width: 100%;
+    overflow-x: auto;
+    outline-style: solid;
+    background-color: seashell;
+    opacity: 80%;
+  }
+
 
 #prvi-red{
     background-position: top;

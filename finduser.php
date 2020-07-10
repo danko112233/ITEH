@@ -2,12 +2,21 @@
 session_start();
 $prof = $_GET['profile'];
 $_SESSION['profilNaKomSmo'] = $prof;
+$user = $_SESSION['username'];
 
 $con = mysqli_connect('localhost', 'root', '' );
 mysqli_select_db($con, 'userregistration');
 $s = "select profilna from usertable where name = '$prof'";
 $res = mysqli_query($con, $s);
 $brojProfilne = mysqli_fetch_row($res);
+
+$provera3 = "select status from friends where user1_id ='$user' and user2_id = '$prof' and status = 1";
+$res3 = mysqli_query($con, $provera3);
+$prijatelji = mysqli_fetch_row($res3);
+$provera4 = "select status from friends where user2_id ='$user' and user1_id = '$prof' and status = 1";
+$res4 = mysqli_query($con, $provera4);
+$prijatelji1 = mysqli_fetch_row($res4);
+
 ?>
 
 <!DOCTYPE html>
@@ -31,6 +40,7 @@ $brojProfilne = mysqli_fetch_row($res);
         <div id = "prva" class= "col-sm">        
             <img src="<?php echo $prof ?>/profile_pic_<?php echo $brojProfilne[0]; ?>.jpg" height="300" width="300">  
         </div>
+        <h1><?php echo $prof; ?> </h1>
         <div id = "druga" class= "col-sm">            
             
                     
@@ -81,30 +91,39 @@ $brojProfilne = mysqli_fetch_row($res);
 
     <div id = "drugi-red" class= "row">
 
-    <?php if($prof != $_SESSION['username']){     ?> 
+    <?php if($prof != $_SESSION['username'] ){     ?> 
         <div class= "col-sm">
-            <form method="get" action="addFriend.php">
-                <button type="submit" class="btn-success">ADD FRIEND</button>
-            </form>
+            <?php if($prijatelji[0]!=1 && $prijatelji1[0]!=1){?>
+                <form method="get" action="addFriend.php">
+                    <button type="submit" class="btn-success">ADD FRIEND</button>
+                </form>
+            <?php } 
+                else{    ?> 
+                <form method="get" action="removeFriend.php">
+                    <button type="submit" class="btn-danger">REMOVE FRIEND</button>
+                </form>            
+                <?php }    ?> 
         </div>
+        
    
-    
-        <div id="chat" class= "col-sm">
-            <div class="col-sm-3 col-sm-offset-4 frame">
-                <ul id='history'></ul>
-                <div>
-                    <div class="msj-rta macro">                        
-                        <div class="text text-r" style="background:whitesmoke !important">
-                            <form action="" method="POST">
-                                <textarea id="poruka" class="txtarea"></textarea>
-                            </form>
-                        </div> 
+        <?php if($prijatelji[0]==1 || $prijatelji1[0]==1){?>
+            <div id="chat" class= "col-sm">
+                <div class="col-sm-3 col-sm-offset-4 frame">
+                    <ul id='history'></ul>
+                    <div>
+                        <div class="msj-rta macro">                        
+                            <div class="text text-r" style="background:whitesmoke !important">
+                                <form action="" method="POST">
+                                    <textarea id="poruka" class="txtarea"></textarea>
+                                </form>
+                            </div> 
 
+                        </div>
+            
                     </div>
-          
-                </div>
-            </div>       
-        </div>
+                </div>       
+            </div>
+        <?php }    ?>  
     <?php }    ?>  
     </div> 
 

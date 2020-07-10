@@ -66,7 +66,7 @@ if ($uploadOk == 0) {
         mysqli_query($con, $reg);
 ?>
 
-<a href="http://localhost/ITEH/finduser.php?profile=<?php echo $_SESSION['username']?>">Vrati se na profil</a>
+<a href="http://localhost/ITEH/ITEH/finduser.php?profile=<?php echo $_SESSION['username']?>">Vrati se na profil</a>
 <?php
     } else {
         echo "Sorry, there was an error uploading your file.";

@@ -19,6 +19,18 @@ $provera2 = "select user2_id, status from friends where user1_id ='$user' and st
 $res2 = mysqli_query($con, $provera2);
 $noFriend2 = mysqli_fetch_row($res2);
 
+$provera3 = "select user2_id from friends where user1_id ='$user' and status = 1";
+$res3 = mysqli_query($con, $provera3);
+$prijatelji = mysqli_fetch_all($res3, MYSQLI_ASSOC);
+$provera4 = "select user1_id from friends where user2_id ='$user' and status = 1";
+$res4 = mysqli_query($con, $provera4);
+$prijatelji1 = mysqli_fetch_all($res4, MYSQLI_ASSOC);
+
+
+#var_dump($prijatelji1);
+#print_r($prijatelji1);
+
+
 if($friend2[1] == "0"){
 ?>
     <div class="alert">
@@ -46,7 +58,6 @@ if($noFriend2[1] == "2"){
     </div> 
     <?php
 }
-    
 
 ?>
 <!DOCTYPE html>
@@ -57,23 +68,26 @@ if($noFriend2[1] == "2"){
     <title>User Login and Signup</title>
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="styleHOME.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <title>Home Page</title>
     <script src="ajax.js"></script> 
+    
 </head>
 <body>
 
     <div id = "prvi-red" class= "row">
         <div id = "prva" class= "col-sm">
-        <form>
-             <input id="find" type="text" size="30" onkeyup="showResult(this.value)">
+            <form>
+                <input id="find" type="text" size="30" onkeyup="showResult(this.value)">
                 <div id="livesearch"></div>
             </form>
-
         </div>
+
         <div id = "druga" class= "col-sm">            
             <a href="finduser.php?profile=<?php echo ''.$_SESSION['username'] ?>">
             visit your profile <?php echo $_SESSION['username'] ?> </a>
         </div>
+        
         <div id = "treca" class="col-sm">
                 <form method="get" action="logout.php">
                     <button id="log" type="submit" class="btn-danger">LOG OUT</button>
@@ -81,16 +95,18 @@ if($noFriend2[1] == "2"){
         </div>
     </div>
 
-    <div id = "drugi-red" class= "row">
+    <div id = "drugi-red" class= "row">   
         <div id = "prvi" class= "col-sm">
-        <p> Trenutna temperatura u Beogradu: </p>
-        <p id = 'trenutna' >  </p>
-        <p>  Feels like: </p>
-        <p id = 'feels-like'>  </p>
-        <p>  Minimalna dnevna: </p>
-        <p id = 'minT'>  </p>
-        <p>  Maksimalna dnevna: </p>
-        <p id = 'maxT'>  </p>
+            <img id="slika1" name="sveslike" src="" > 
+            <img id="slika2" name="sveslike" src="" > 
+            <img id="slika3" name="sveslike" src="" > 
+            <img id="slika4" name="sveslike" src="" > 
+            <img id="slika5" name="sveslike" src="" > 
+            <img id="slika6" name="sveslike" src="" > 
+            <img id="slika7" name="sveslike" src="" > 
+            <img id="slika8" name="sveslike" src="" > 
+            <img id="slika9" name="sveslike" src="" > 
+            <img id="slika10" name="sveslike" src="" > 
             <script>
                 var data = null;
 
@@ -100,42 +116,34 @@ if($noFriend2[1] == "2"){
                 xhr.addEventListener("readystatechange", function () {
                     if (this.readyState === this.DONE) {
                         console.log(this.responseText);
-
-                        var a = this.responseText.split("temp");
-                        var kelvin = parseFloat(a[1].substring(2,8));
-                        var celzius = Math.round((kelvin - 273.15) * 100) / 100;
-                        document.getElementById('trenutna').innerHTML = celzius;
-
-                        var a1 = this.responseText.split("feels_like");
-                        var kelvin1 = parseFloat(a1[1].substring(2,8));
-                        var celzius1 = Math.round((kelvin1 - 273.15) * 100) / 100;
-                        document.getElementById('feels-like').innerHTML = celzius1;
-
-                        var a2 = this.responseText.split("temp_min");
-                        var kelvin2 = parseFloat(a2[1].substring(2,8));
-                        var celzius2 = Math.round((kelvin2 - 273.15) * 100) / 100;
-                        document.getElementById('minT').innerHTML = celzius2;
-
-                        var a3 = this.responseText.split("temp_max");
-                        var kelvin3 = parseFloat(a3[1].substring(2,8));
-                        var celzius3 = Math.round((kelvin3 - 273.15) * 100) / 100;
-                        document.getElementById('maxT').innerHTML = celzius3;
-
+                        var obj = JSON.parse(this.responseText);
+                        for(i=0; i<10; i++){                 
+                            var j = i+1;         
+                            document.getElementById('slika'+j).src = obj[i].download_url;
+                        }
                     }
                 });
-
-                xhr.open("GET", "https://community-open-weather-map.p.rapidapi.com/weather?callback=test&id=2172797&units=%2522metric%2522%20&mode=xml%252C%20html&q=Belgrade");
-                xhr.setRequestHeader("x-rapidapi-host", "community-open-weather-map.p.rapidapi.com");
-                xhr.setRequestHeader("x-rapidapi-key", "8a8b21910cmshd8cb182cc7e24cdp10cdb1jsn7221eb5a917d");
-                // za ovaj key treba registracija 
+                var stranica = Math.floor((100*Math.random()) +1);
+                xhr.open("GET", "https://picsum.photos/v2/list?page="+stranica+"&limit=10");
                 xhr.send(data);
-                
-                
+    
             </script>
         </div>
-        <div class= "col-sm">
-            
+
+
+        <div id="drugi" class= "col-sm">
+            <ul id="listaPr" class="w3-ul">
+                <?php
+                    foreach($prijatelji1 as $value){
+                        echo '<li class="w3-hover-blue"><a href="finduser.php?profile='.$value['user1_id'].'">'.$value['user1_id']."</a></li>";
+                    }
+                    
+                    foreach($prijatelji as $value){
+                        echo '<li class="w3-hover-green"><a href="finduser.php?profile='.$value['user2_id'].'">'.$value['user2_id']."</a></li>";
+                    }    
+                ?>
+            </ul>   
         </div>
-    </div>  
+    </div>
 </body>
 </html>

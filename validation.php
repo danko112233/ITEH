@@ -23,12 +23,20 @@ $type = mysqli_fetch_row($res1);
 if($num == 1){
     $_SESSION['username'] = $name;
     $_SESSION['profilna'] = $prof[0];
-    $_SESSION['tip'] = $type[0];
-    header('location:home.php');
-    if(!file_exists("C:/xampp/htdocs/ITEH/".$name)){
-        mkdir("C:/xampp/htdocs/ITEH/".$name);
+    $_SESSION['tip'] = $type[0];    
+    if(!file_exists("C:/xampp/htdocs/ITEH/ITEH/".$name)){
+        mkdir("C:/xampp/htdocs/ITEH/ITEH/".$name);
     }
+    if($prof[0]==0){
+        $file = 'C:/xampp/htdocs/ITEH/ITEH/img_upload/default.jpg';
+        $newfile = 'C:/xampp/htdocs/ITEH/ITEH/'.$name.'/profile_pic_0.jpg';
+
+        if (!copy($file, $newfile)) {
+            echo "failed to copy";
+        }
+    }
+    header('location:home.php');
 } else {
-    header('location:login.php');
+    header('location:login.php?msg=failed');
 }
 ?>

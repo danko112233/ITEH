@@ -13,13 +13,32 @@ $result = mysqli_query($con, $s);
 $num = mysqli_num_rows($result);
 
 if($num == 1){
-    echo "username already taken";
-} else {
+    header('location:login.php?msg1=failed');
+} 
+elseif(strlen($pass) < 8){
+    header('location:login.php?msg1=notEnough');
+} 
+elseif(!preg_match("#[0-9]+#", $pass)){
+    header('location:login.php?msg1=noNum');
+} 
+elseif(!preg_match("#[a-zA-Z]+#", $pass)){
+    header('location:login.php?msg1=noLett');
+}
+elseif(!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $pass)){
+    header('location:login.php?msg1=noSymb');
+}
+else{
     $reg = "insert into usertable(name , password) values ('$name', '$pass')";
     mysqli_query($con, $reg);
     echo "Registration successful";
     
-    mkdir("C:/xampp/htdocs/ITEH/".$name);
-}
+    mkdir("C:/xampp/htdocs/ITEH/ITEH/".$name);
+    
+    $file = 'C:/xampp/htdocs/ITEH/ITEH/img_upload/default.jpg';
+    $newfile = 'C:/xampp/htdocs/ITEH/ITEH/'.$name.'/profile_pic_0.jpg';
 
+    if (!copy($file, $newfile)) {
+        echo "failed to copy";
+    }
+}
 ?>
