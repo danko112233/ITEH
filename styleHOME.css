@@ -10,6 +10,20 @@ img[name=sveslike]{
     height: auto;
 }
 
+#lista{
+    position: absolute;
+    width: 100mm;
+    top: 75%;
+    left: 22%;
+    background: #A5ACB2;
+    z-index: 1;
+}
+
+#imena{
+    background-color: #A5ACB2;
+    text-align: left;
+}
+
 #listaPr {
     position: fixed;
     bottom: 1%;

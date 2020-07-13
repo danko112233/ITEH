@@ -14,9 +14,12 @@ function showResult(str) {
     if (this.readyState==4 && this.status==200) {
       document.getElementById("livesearch").innerHTML=this.responseText;
       document.getElementById("livesearch").style.border="2px solid #A5ACB2";
+      document.getElementById("lista").innerHTML="";
     }
   }
   xmlhttp.open("GET","people.php?q="+str,true);
 
   xmlhttp.send();
 }
+
+

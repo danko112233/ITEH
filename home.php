@@ -74,18 +74,45 @@ if($noFriend2[1] == "2"){
     
 </head>
 <body>
+    <?php 
+        $curl = curl_init();
 
+        curl_setopt($curl, CURLOPT_URL, "localhost/ITEH/ITEH/usertable.json");
+
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+
+        $output = curl_exec($curl);
+        $output = json_decode($output);
+ 
+        $o = '';
+        for($i = 0; $i < sizeof($output); $i++){         
+            $o .= "<li id = 'imena'>".$output[$i]->{'name'}."</li> ";                            
+        }
+        curl_close($curl);
+    ?>  
     <div id = "prvi-red" class= "row">
         <div id = "prva" class= "col-sm">
             <form>
-                <input id="find" type="text" size="30" onkeyup="showResult(this.value)">
-                <div id="livesearch"></div>
-            </form>
+
+                <input id="find" type="text" size="30" onkeyup="showResult(this.value)"  onmouseover="lista()" onmouseout="nemaliste()">
+                <div id="livesearch"> </div>
+                
+            </form>                
+                <ul id="lista">  </ul>
+                <script>
+                    function lista(){
+                        document.getElementById("lista").innerHTML=" <?php echo $o; ?> ";
+                        }
+                        function nemaliste(){
+                        document.getElementById("lista").innerHTML="";
+                        }
+                </script>
         </div>
 
         <div id = "druga" class= "col-sm">            
             <a href="finduser.php?profile=<?php echo ''.$_SESSION['username'] ?>">
             visit your profile <?php echo $_SESSION['username'] ?> </a>
+
         </div>
         
         <div id = "treca" class="col-sm">
@@ -95,8 +122,10 @@ if($noFriend2[1] == "2"){
         </div>
     </div>
 
-    <div id = "drugi-red" class= "row">   
+    <div id = "drugi-red" class= "row"> 
         <div id = "prvi" class= "col-sm">
+
+
             <img id="slika1" name="sveslike" src="" > 
             <img id="slika2" name="sveslike" src="" > 
             <img id="slika3" name="sveslike" src="" > 
@@ -129,7 +158,6 @@ if($noFriend2[1] == "2"){
     
             </script>
         </div>
-
 
         <div id="drugi" class= "col-sm">
             <ul id="listaPr" class="w3-ul">

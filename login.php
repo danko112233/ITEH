@@ -66,6 +66,9 @@
         elseif (isset($_GET["msg1"]) && $_GET["msg1"] == 'noSymb') {
             echo "Password must contain at least one symbol: \'^£$%&*()}{@#~?><>,|=_+¬-";
         }
+        elseif (isset($_GET["msg1"]) && $_GET["msg1"] == 'succ') {
+            echo "Registration successful";
+        }
         
     ?>  
         </div>

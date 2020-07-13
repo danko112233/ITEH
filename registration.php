@@ -30,8 +30,7 @@ elseif(!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $pass)){
 else{
     $reg = "insert into usertable(name , password) values ('$name', '$pass')";
     mysqli_query($con, $reg);
-    echo "Registration successful";
-    
+       
     mkdir("C:/xampp/htdocs/ITEH/ITEH/".$name);
     
     $file = 'C:/xampp/htdocs/ITEH/ITEH/img_upload/default.jpg';
@@ -40,5 +39,7 @@ else{
     if (!copy($file, $newfile)) {
         echo "failed to copy";
     }
+
+    header('location:login.php?msg1=succ');
 }
 ?>
